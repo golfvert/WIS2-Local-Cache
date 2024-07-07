@@ -1,1 +1,586 @@
-[]
+[
+    {
+        "id": "c08b0160b09a38ea",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ce2cac978984a426",
+        "type": "group",
+        "z": "c08b0160b09a38ea",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "dae14136f482103c",
+            "6c2aa04153a511ed",
+            "051f1aadd5a065d6",
+            "19bcd70c18019596",
+            "b7063bd33192a3f5",
+            "dd045490fff21a17",
+            "93a9fa867e314aa1",
+            "8a2be6e648c0be85",
+            "20ce89c8428168cd",
+            "2d49c2d7293068cb",
+            "6eec155760a7fd7f",
+            "c6d58105281bcb7b"
+        ],
+        "x": 54,
+        "y": 39,
+        "w": 752,
+        "h": 302
+    },
+    {
+        "id": "dd410bebb1e18cb0",
+        "type": "redis-config",
+        "name": "Cluster",
+        "options": "$eval($env(\"REDIS_URL\"))",
+        "cluster": true,
+        "optionsType": "jsonata"
+    },
+    {
+        "id": "8cf5f6b5.937088",
+        "type": "mqtt-broker",
+        "name": "Subscriber 1",
+        "broker": "\"\"",
+        "port": "",
+        "tls": "",
+        "clientid": "",
+        "autoConnect": false,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "ac0560c0180e4641",
+        "type": "mqtt-broker",
+        "name": "Publisher",
+        "broker": "${MQTT_PUB_BROKER}",
+        "port": "",
+        "tls": "",
+        "clientid": "",
+        "autoConnect": false,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "5d0631829da75c47",
+        "type": "mqtt-broker",
+        "name": "Subscriber 2",
+        "broker": "\"\"",
+        "port": "",
+        "clientid": "",
+        "autoConnect": false,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "dae14136f482103c",
+        "type": "inject",
+        "z": "c08b0160b09a38ea",
+        "g": "ce2cac978984a426",
+        "name": "Once",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.5",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 180,
+        "wires": [
+            [
+                "19bcd70c18019596"
+            ]
+        ]
+    },
+    {
+        "id": "6c2aa04153a511ed",
+        "type": "comment",
+        "z": "c08b0160b09a38ea",
+        "g": "ce2cac978984a426",
+        "name": "Initialize",
+        "info": "",
+        "x": 130,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "051f1aadd5a065d6",
+        "type": "redis-instance",
+        "z": "c08b0160b09a38ea",
+        "g": "ce2cac978984a426",
+        "server": "dd410bebb1e18cb0",
+        "name": "",
+        "topic": "redis",
+        "location": "flow",
+        "x": 250,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "19bcd70c18019596",
+        "type": "createrandom",
+        "z": "c08b0160b09a38ea",
+        "g": "ce2cac978984a426",
+        "generator": "UUID",
+        "type_generator": "generator",
+        "label": "UUID",
+        "param_1": "v4",
+        "type_param_1": "Version",
+        "param_2": "",
+        "type_param_2": "msg",
+        "param_3": "",
+        "type_param_3": "msg",
+        "f_use_debug": false,
+        "x": 310,
+        "y": 180,
+        "wires": [
+            [
+                "dd045490fff21a17",
+                "b7063bd33192a3f5",
+                "93a9fa867e314aa1",
+                "6eec155760a7fd7f"
+            ]
+        ]
+    },
+    {
+        "id": "b7063bd33192a3f5",
+        "type": "change",
+        "z": "c08b0160b09a38ea",
+        "g": "ce2cac978984a426",
+        "name": "Save",
+        "rules": [
+            {
+                "t": "set",
+                "p": "uuid",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 120,
+        "wires": [
+            [
+                "2d49c2d7293068cb"
+            ]
+        ]
+    },
+    {
+        "id": "dd045490fff21a17",
+        "type": "change",
+        "z": "c08b0160b09a38ea",
+        "g": "ce2cac978984a426",
+        "name": "Handle connection",
+        "rules": [
+            {
+                "t": "set",
+                "p": "action",
+                "pt": "msg",
+                "to": "connect",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "broker",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "broker.force",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "broker.url",
+                "pt": "msg",
+                "to": "MQTT_SUB_BROKER1",
+                "tot": "env"
+            },
+            {
+                "t": "set",
+                "p": "broker.usetls",
+                "pt": "msg",
+                "to": "$contains($env(\"MQTT_SUB_BROKER1\"),/wss/) or $contains($env(\"MQTT_SUB_BROKER1\"),/mqtts/)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "broker.verifyservercert",
+                "pt": "msg",
+                "to": "false",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "broker.username",
+                "pt": "msg",
+                "to": "MQTT_SUB_USERNAME1",
+                "tot": "env"
+            },
+            {
+                "t": "set",
+                "p": "broker.password",
+                "pt": "msg",
+                "to": "MQTT_SUB_PASSWORD1",
+                "tot": "env"
+            },
+            {
+                "t": "set",
+                "p": "broker.protocolVersion",
+                "pt": "msg",
+                "to": "$length($env(\"MQTT_SUB_BROKERVERSION\")) = 0 ? 5 : $env(\"MQTT_SUB_BROKERVERSION\")",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "broker.clientid",
+                "pt": "msg",
+                "to": "$length($env(\"MQTT_CLIENTID\")) = 0 ? payload : $env(\"MQTT_CLIENTID\") & \"_\" & $split(payload,\"-\")[4]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 180,
+        "wires": [
+            [
+                "8a2be6e648c0be85"
+            ]
+        ]
+    },
+    {
+        "id": "93a9fa867e314aa1",
+        "type": "change",
+        "z": "c08b0160b09a38ea",
+        "g": "ce2cac978984a426",
+        "name": "Handle connection",
+        "rules": [
+            {
+                "t": "set",
+                "p": "action",
+                "pt": "msg",
+                "to": "connect",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "broker",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "broker.force",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "broker.url",
+                "pt": "msg",
+                "to": "MQTT_PUB_BROKER",
+                "tot": "env"
+            },
+            {
+                "t": "set",
+                "p": "broker.usetls",
+                "pt": "msg",
+                "to": "$contains($env(\"MQTT_PUB_BROKER\"),/wss/) or $contains($env(\"MQTT_PUB_BROKER\"),/mqtts/)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "broker.username",
+                "pt": "msg",
+                "to": "MQTT_PUB_USERNAME",
+                "tot": "env"
+            },
+            {
+                "t": "set",
+                "p": "broker.password",
+                "pt": "msg",
+                "to": "MQTT_PUB_PASSWORD",
+                "tot": "env"
+            },
+            {
+                "t": "set",
+                "p": "broker.protocolVersion",
+                "pt": "msg",
+                "to": "$length($env(\"MQTT_PUB_BROKERVERSION\")) = 0 ? 4 : $env(\"MQTT_PUB_BROKERVERSION\")",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "broker.clientid",
+                "pt": "msg",
+                "to": "$env(\"CENTRE_ID\") & \"_\" & $split(payload,\"-\")[4]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 300,
+        "wires": [
+            [
+                "20ce89c8428168cd"
+            ]
+        ]
+    },
+    {
+        "id": "8a2be6e648c0be85",
+        "type": "mqtt in",
+        "z": "c08b0160b09a38ea",
+        "g": "ce2cac978984a426",
+        "name": "Define Subscriber 1",
+        "topic": "",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "8cf5f6b5.937088",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 1,
+        "x": 690,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "20ce89c8428168cd",
+        "type": "mqtt out",
+        "z": "c08b0160b09a38ea",
+        "g": "ce2cac978984a426",
+        "name": "Define Publisher",
+        "topic": "",
+        "qos": "1",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ac0560c0180e4641",
+        "x": 680,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "2d49c2d7293068cb",
+        "type": "link out",
+        "z": "c08b0160b09a38ea",
+        "g": "ce2cac978984a426",
+        "name": "link out 25",
+        "mode": "link",
+        "links": [
+            "a928c6d420cd98cd"
+        ],
+        "x": 535,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "6eec155760a7fd7f",
+        "type": "change",
+        "z": "c08b0160b09a38ea",
+        "g": "ce2cac978984a426",
+        "name": "Handle connection",
+        "rules": [
+            {
+                "t": "set",
+                "p": "action",
+                "pt": "msg",
+                "to": "connect",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "broker",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "broker.force",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "broker.url",
+                "pt": "msg",
+                "to": "MQTT_SUB_BROKER2",
+                "tot": "env"
+            },
+            {
+                "t": "set",
+                "p": "broker.usetls",
+                "pt": "msg",
+                "to": "$contains($env(\"MQTT_SUB_BROKER2\"),/wss/) or $contains($env(\"MQTT_SUB_BROKER2\"),/mqtts/)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "broker.verifyservercert",
+                "pt": "msg",
+                "to": "false",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "broker.username",
+                "pt": "msg",
+                "to": "MQTT_SUB_USERNAME2",
+                "tot": "env"
+            },
+            {
+                "t": "set",
+                "p": "broker.password",
+                "pt": "msg",
+                "to": "MQTT_SUB_PASSWORD2",
+                "tot": "env"
+            },
+            {
+                "t": "set",
+                "p": "broker.protocolVersion",
+                "pt": "msg",
+                "to": "$length($env(\"MQTT_SUB_BROKERVERSION\")) = 0 ? 5 : $env(\"MQTT_SUB_BROKERVERSION\")",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "broker.clientid",
+                "pt": "msg",
+                "to": "$length($env(\"MQTT_CLIENTID\")) = 0 ? payload : $env(\"MQTT_CLIENTID\") & \"_\" & $split(payload,\"-\")[4]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 240,
+        "wires": [
+            [
+                "c6d58105281bcb7b"
+            ]
+        ]
+    },
+    {
+        "id": "c6d58105281bcb7b",
+        "type": "mqtt in",
+        "z": "c08b0160b09a38ea",
+        "g": "ce2cac978984a426",
+        "name": "Define Subscriber 2",
+        "topic": "",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "5d0631829da75c47",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 1,
+        "x": 690,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    }
+]
